@@ -15,7 +15,7 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 
 public class Producer {
 
-	private static String brokerURL = "tcp:192.168.1.102:61616";
+	private static String brokerURL = "tcp:127.0.0.1:61616";
 	private static transient ConnectionFactory factory;
 	private transient Connection connection;
 	private transient Session session;
@@ -54,6 +54,7 @@ public class Producer {
 	public void sendMessage() throws JMSException {
 		// TODO Auto-generated method stub
 		Destination destination = session.createQueue(queueName);
+//		session.createTopic("TEST.TOO");
 		Message message = session.createObjectMessage(queueName + id++);
 		producer.send(destination, message);
 	}

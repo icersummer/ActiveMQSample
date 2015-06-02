@@ -13,7 +13,7 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 
 public class Consumer {
 
-	private static String brokerURL = "tcp:102.168.1.102:61616";
+	private static String brokerURL = "tcp:127.0.0.1:61616";
 	private static transient ConnectionFactory factory;
 	private transient Connection connection;
 	private transient Session session;
@@ -40,7 +40,8 @@ public class Consumer {
 	 */
 	public static void main(String[] args) throws JMSException {
 		Consumer consumer = new Consumer();
-		Destination destination = consumer.getSession().createQueue(queueName);
+		Destination destination = consumer.getSession().createQueue(queueName); // P2P
+//		Destination topicDestination = consumer.getSession().createTopic("TEST.FOO");// Pub/Sub
 		MessageConsumer messageConsumer = consumer.getSession().createConsumer(
 				destination);
 		messageConsumer.setMessageListener(new AsyncListener());
